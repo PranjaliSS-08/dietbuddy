@@ -103,10 +103,12 @@ app.post("/api/dialogflow", async (req, res) => {
   }
 });
 
-app.get("/", (_req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
+// Serve static files from the React frontend build
+app.use(express.static(path.join(__dirname, "client/dist")));
 
+app.get(/.*/, (_req, res) => {
+  res.sendFile(path.join(__dirname, "client/dist", "index.html"));
+});
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`✅ Server running on http://localhost:${port}`);
