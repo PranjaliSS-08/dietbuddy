@@ -1,6 +1,6 @@
 const { useEffect, useMemo, useRef, useState } = React;
 
-const API_URL = "https://your-dietbuddy-api-link/api/dialogflow";
+const API_URL = "/api/dialogflow";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
