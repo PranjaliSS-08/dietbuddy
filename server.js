@@ -1,6 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 import { SessionsClient } from "@google-cloud/dialogflow";
 
 console.log("Starting Dialogflow server...");
@@ -8,6 +10,10 @@ console.log("Starting Dialogflow server...");
 const app = express();
 app.use(bodyParser.json());
 app.use(cors()); // allow requests from your React frontend
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname, "public")));
 
 // Initialize Dialogflow client
 let client;
@@ -36,6 +42,9 @@ try {
 
 app.post("/api/dialogflow", async (req, res) => {
   const { text } = req.body;
+  if (!text || !String(text).trim()) {
+    return res.status(400).json({ reply: "Please enter a message." });
+  }
   console.log("Received text:", text);
 
   const sessionPath = client.projectAgentSessionPath(
@@ -92,6 +101,10 @@ app.post("/api/dialogflow", async (req, res) => {
     console.error("Dialogflow error:", err); // log full error
     res.status(500).json({ reply: "Error contacting Dialogflow." });
   }
+});
+
+app.get("/", (_req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 const port = process.env.PORT || 5000;

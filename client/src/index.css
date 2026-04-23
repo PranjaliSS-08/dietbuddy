@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg: #f6fff8;
+  --surface: #ffffff;
+  --surface-hover: #f1f8f3;
+  --primary: #4caf50;
+  --primary-hover: #43a047;
+  --primary-light: #e8f5e9;
+  --text: #1b2a1c;
+  --text-muted: #6b8f71;
+  --shadow-color: rgba(76, 175, 80, 0.1);
+  --shadow: 0 4px 20px var(--shadow-color);
+  --shadow-lg: 0 8px 30px var(--shadow-color);
+  --border: #e0eee4;
+}
+
+[data-theme='dark'] {
+  --bg: #0f1a13;
+  --surface: #1a2e1d;
+  --surface-hover: #213a24;
+  --primary: #66bb6a;
+  --primary-hover: #81c784;
+  --primary-light: #1b3a1e;
+  --text: #e8f5e9;
+  --text-muted: #8faa92;
+  --shadow-color: rgba(0, 0, 0, 0.4);
+  --shadow: 0 4px 20px var(--shadow-color);
+  --shadow-lg: 0 8px 30px var(--shadow-color);
+  --border: #2c4731;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--primary-hover);
+}
+
+button {
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes typing {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.typing-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--text-muted);
+  border-radius: 50%;
+  animation: typing 1s infinite;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
